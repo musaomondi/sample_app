@@ -24,6 +24,7 @@ end
   assert_response :success
   assert_select "title", "Contact | #{@base_title}"
   assert_select "h3", "Our Location"
+
 end
 
 end
