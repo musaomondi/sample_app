@@ -24,7 +24,21 @@ end
   assert_response :success
   assert_select "title", "Contact | #{@base_title}"
   assert_select "h3", "Our Location"
-
 end
+test "should get resume" do
+  get :resume
+  assert_response :success
+  assert_select "title", "Resume | #{@base_title}"
+  assert_select "h1", "Curriculum Vitae"
+  assert_select "h2", "Personal Details"
+  assert_select "p", "Name: Musa Omondi"
+  assert_select "h2", "Education"
+  assert_select "h3", "Maseno univesity"
+  assert_select "p","Bsc Computer Science"
+  assert_select "h2", "Hobbies"
+  assert_select "li", "Playing Badminton"
+  assert_select "h2", "Referee"
+  
+  end
 
 end
