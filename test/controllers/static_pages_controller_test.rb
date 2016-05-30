@@ -33,7 +33,7 @@ test "should get resume" do
   assert_select "h2", "Personal Details"
   assert_select "p", "Name: Musa Omondi"
   assert_select "h2", "Education"
-  assert_select "h3", "Maseno univesity"
+  assert_select "h3", "Maseno Univesity"
   assert_select "p","Bsc Computer Science"
   assert_select "h2", "Hobbies"
   assert_select "li", "Playing Badminton"

@@ -13,6 +13,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'spring'
   gem 'pry'
+  gem 'rails-controller-testing'
 end
 group :test do
 gem 'minitest-reporters'
