@@ -1,1 +1,4 @@
-musa: {}
+musa: 
+  name: Musa Amoke
+  email: amokem@yahoo.com
+  password_digest: <%= User.digest('password') %>
