@@ -2,3 +2,8 @@ musa:
   name: Musa Amoke
   email: amokem@yahoo.com
   password_digest: <%= User.digest('password') %>
+
+bena:
+  name: Benard Omondi
+  email: bomondi@yahoo.com
+  password_digest: <%= User.digest('password') %>
