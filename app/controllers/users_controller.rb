@@ -24,12 +24,15 @@ class UsersController < ApplicationController
   		render 'new'
   	end
   end
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
   def edit
     @user = User.find_by(id: params[:id])
   end
 
   def update
-    @user=User.find_by(params[:id])
+    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -50,9 +53,6 @@ class UsersController < ApplicationController
   	params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
   # Confirms an admin user.
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
-  end
   def logged_in_user
     unless logged_in?
       store_location
