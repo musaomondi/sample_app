@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-<<<<<<< HEAD
-=======
+
 	has_many :microposts
->>>>>>> updating-users
+
 	has_many :microposts, dependent: :destroy
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase}

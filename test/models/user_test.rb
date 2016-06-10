@@ -52,11 +52,7 @@ class UserTest < ActiveSupport::TestCase
     @user.save
     @user.microposts.create!(content: "Lorem ipsum")
     assert_difference 'Micropost.count', -1 do
-<<<<<<< HEAD
       @user.destroy
-=======
-       @user.destroy
->>>>>>> updating-users
     end
   end
 end
