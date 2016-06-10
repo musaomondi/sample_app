@@ -6,7 +6,11 @@ orange:
   user: michael
 
 tau_manifesto:
+<<<<<<< HEAD
   content: "check out the @tauday by @mhartl: http://tauday.com"
+=======
+  content: "Check out the @tauday site by @mhartl: http://tauday.com"
+>>>>>>> updating-users
   created_at: <%= 3.years.ago %>
   user: michael
 
@@ -25,4 +29,8 @@ micropost_<%= n %>:
   content: <%= Faker::Lorem.sentence(5) %>
   created_at: <%= 42.days.ago %>
   user: michael
+<<<<<<< HEAD
 <% end %>
+=======
+<% end %>
+>>>>>>> updating-users
