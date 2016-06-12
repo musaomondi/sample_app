@@ -9,7 +9,7 @@ class MicropostInterfaceTest < ActionDispatch::IntegrationTest
   	log_in_as(@user)
   	get root_path
   	assert_select 'div.pagination'
-  	assert_select 'input[type=FILL_IN]'
+  	assert_select 'input[type=file]'
   	#Invalid submission
   	post microposts_path, micropost: { content: "" }
   	assert_select 'div#error_explanation'
@@ -17,9 +17,9 @@ class MicropostInterfaceTest < ActionDispatch::IntegrationTest
 	content = "This micropost really ties the room together"
 	picture = fixture_file_upload('test/fixtures/rails.png', 'image/png')
 	assert_difference 'Micropost.count', 1 do
-		post microposts_path, micropost: { content: content, picture: FILL_IN }
+		post microposts_path, micropost: { content: content, picture: picture }
 	end
-	assert FILL_IN.picture?
+	assert assigns(:micropost).picture?
 	follow_redirect!
 	assert_match content, response.body
 	# Delete a post.
@@ -36,7 +36,7 @@ class MicropostInterfaceTest < ActionDispatch::IntegrationTest
   	test "micropost sidebar count" do
 		log_in_as(@user)
 		get root_path
-		assert_match "#{FILL_IN} microposts", response.body
+		assert_match "#{@user.microposts.count} microposts", response.body
 		# User with zero microposts
 		other_user = users(:mallory)
 		log_in_as(other_user)
@@ -44,6 +44,6 @@ class MicropostInterfaceTest < ActionDispatch::IntegrationTest
 		assert_match "0 microposts", response.body
 		other_user.microposts.create!(content: "A micropost")
 		get root_path
-		assert_match FILL_IN, response.body
+		assert_match "1 micropost", response.body
 end
 end
