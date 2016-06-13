@@ -35,6 +35,15 @@ def User.digest(string)
  def feed
 	Micropost.where("user_id = ?", id)
  end
+ # Activates account
+ def activate
+ 	update_attribute(:activated, true)
+ 	update_attribute(:activated_at, Time.zone.now)
+ end
+ #Sends activation email
+ def send_activation_email
+ 	UserMailer.account_activation(self).deliver_now
+ end
  private
  # Creates email to all lower-case
  def downcase_email
@@ -46,4 +55,6 @@ def User.digest(string)
  	self.activation_token = User.new_token
  	self.activation_digest = User.digest(activation_token)
  end
- end
+end
+ 
+
