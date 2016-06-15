@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
 
 	has_many :microposts
 	has_many :microposts, dependent: :destroy
+	has_many :active_relationships, class_name: "Relationship",
+									foreign_key: "follower_id",
+									dependent: :destroy
+	has_many :following, through: :active_relationships, source: :followed
 	attr_accessor :remember_token, :activation_token
 	before_create :create_activation_digest
 	before_save { self.email = email.downcase}
@@ -43,6 +47,18 @@ def User.digest(string)
  #Sends activation email
  def send_activation_email
  	UserMailer.account_activation(self).deliver_now
+ end
+ #Follows a user
+ def follow(other_user)
+ 	active_relationships.create(followed_id: other_user_id)
+ end
+ #Unfollows a user.
+ def unfollow(other_user)
+ 	active_relationships.find_by(followed_id: other_user_id).destroy
+ end
+ #Returns true if the cureent user is following the other user.
+ def following?(other_user)
+ 	following.include?(other_user)
  end
  private
  # Creates email to all lower-case
